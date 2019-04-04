@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MiniQuery</title>
+
+    <script src="./lib/index.js"></script>
+</head>
+<body>
+    <div id="eyed">Ini ID</div>
+    <div class="btn">Ini Class</div>
+    <div class="btn_listen"><button>Listen</button></div>
+    <a href="#">Ini a</a>
+    <br>
+    <button type="button" onclick="load()">Request data</button>
+
+    <p id="test"></p>
+
+    <script>
+        console.log(SweetSelector.select('#eyed'))
+        console.log(SweetSelector.select('.btn'))
+        console.log(SweetSelector.select('a'))
+        // DOM.hide('.btn')
+        // DOM.show('.btn')
+        // DOM.addClass('.btn', 'willy')
+        // DOM.removeClass('.btn', 'willy')
+        EventDispatcher.on('.btn_listen', 'click', function() { console.log('awesome')})
+        // EventDispatcher.trigger('.btn_dispatch', 'click')
+        function load() {
+            AjaxWrapper.request({
+                url: 'https://api.github.com/users/defunkt',
+                type: 'GET',
+                success: function(data) {
+                    console.log("Success: ", data)
+                },
+                fail: function() {
+                    console.log("ERROR")
+                }
+            })
+        }
+    </script>
+</body>
+</html>
